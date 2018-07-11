@@ -12,8 +12,6 @@ import sys
 import csv
 #from StringIO import StringIO
 from scapy.all import * # Scapy dependences
-import IPfunctions      # Functions used for IP calculations
-import resultsDisplay   # Final results display 
 from iec104lib import *	# Library iec 60870-5-104
 
 class bcolors: 			# Terminal's color
@@ -372,36 +370,36 @@ if __name__ == "__main__":
 		print ('No packets sniffed in', round((stop_time-init_time),4), 'seconds.')
 
 	else:
-		TCP_percent = ((resultsDisplay.divide_float(TCP_counter,pkt_counter))*100)
-		IEC104_percent = ((resultsDisplay.divide_float(IEC104_counter,pkt_counter))*100)
-		print ('Time elapsed:', round((stop_time-init_time),4), 'seconds.')
+		TCP_percent = ((divide(TCP_counter,pkt_counter))*100)
+		IEC104_percent = ((divide(IEC104_counter,pkt_counter))*100)
+		print ('Time elapsed:'+bcolors.OKBLUE+'', round((stop_time-init_time),4), 'seconds.'+bcolors.ENDC)
 		print ('Packets sniffed:', pkt_counter)
-		print ('---- IEC 60870-5-104 packets:',IEC104_counter, bcolors.ENDC,'Percent:',IEC104_percent,'%')
+		print ('---- IEC 60870-5-104 packets:'+bcolors.OKGREEN+'',IEC104_counter, bcolors.ENDC,'Percent:'+bcolors.OKGREEN+'',IEC104_percent,'%'+bcolors.ENDC)
 
 		if IEC104_counter_i > 0: # print different types iec104-TypeI
-			IEC104_percent_i = ((resultsDisplay.divide_float(IEC104_counter_i,IEC104_counter))*100)
-			print ('---- IEC 60870-5-104 packets Type I:',IEC104_counter_i,'Percent:',IEC104_percent_i,'%')
+			IEC104_percent_i = ((divide(IEC104_counter_i,IEC104_counter))*100)
+			print ('---- IEC 60870-5-104 packets Type I:'+bcolors.OKGREEN+'',IEC104_counter_i, bcolors.ENDC,'Percent:'+bcolors.OKGREEN+'',IEC104_percent_i,'%'+bcolors.ENDC)
 			print ('\t\tIP\t\tTipos\tContador\tPorcentaje')
 			lista.sort(key=lambda typesid: typesid.tipos)
 			for i in range(numero):
-				porcentaje = ((resultsDisplay.divide_float(lista[i].cont,IEC104_counter_i))*100)
-				print '\t\t',lista[i].ip,'\t',lista[i].tipos,'\t',lista[i].cont,'\t\t',porcentaje,'%'			   
+				porcentaje = ((divide(lista[i].cont,IEC104_counter_i))*100)
+				print ('\t\t',lista[i].ip,'\t',lista[i].tipos,'\t',lista[i].cont,'\t\t',porcentaje,'%'			   )
 				
 		if IEC104_counter_s > 0: # print different types iec104-TypeS
-			IEC104_percent_s = ((resultsDisplay.divide_float(IEC104_counter_s,IEC104_counter))*100)
-			print ('---- IEC 60870-5-104 packets Type S:',IEC104_counter_s, 'Percent:',IEC104_percent_s,'%')
+			IEC104_percent_s = ((divide(IEC104_counter_s,IEC104_counter))*100)
+			print ('---- IEC 60870-5-104 packets Type S:'+bcolors.OKGREEN+'',IEC104_counter_s, bcolors.ENDC,'Percent:'+bcolors.OKGREEN+'',IEC104_percent_s,'%'+bcolors.ENDC)
 
 		if IEC104_counter_u > 0: # print different types iec104-TypeU
-			IEC104_percent_u = ((resultsDisplay.divide_float(IEC104_counter_u,IEC104_counter))*100)
+			IEC104_percent_u = ((divide(IEC104_counter_u,IEC104_counter))*100)
 			print ('---- IEC 60870-5-104 packets Type U:'+bcolors.OKGREEN+'',IEC104_counter_u, bcolors.ENDC,'Percent:'+bcolors.OKGREEN+'',IEC104_percent_u,'%'+bcolors.ENDC)
-			print ('\t\tSTARTDT act =' ,STARTDTact)
-			print ('\t\tSTARTDT con =' ,STARTDTcon)
-			print ('\t\tSTOPDT act =' ,STOPDTact)
-			print ('\t\tSTOPDT con =' ,STOPDTcon)
-			print ('\t\tTESTFR act =' ,TESTFRact)
-			print ('\t\tTESTFR con =' ,TESTFRcon)
+			print ('\t\tSTARTDT act =' +bcolors.OKBLUE+'',STARTDTact, bcolors.ENDC)
+			print ('\t\tSTARTDT con =' +bcolors.OKBLUE+'',STARTDTcon, bcolors.ENDC)
+			print ('\t\tSTOPDT act =' +bcolors.OKBLUE+'',STOPDTact, bcolors.ENDC)
+			print ('\t\tSTOPDT con =' +bcolors.OKBLUE+'',STOPDTcon, bcolors.ENDC)
+			print ('\t\tTESTFR act =' +bcolors.OKBLUE+'',TESTFRact, bcolors.ENDC)
+			print ('\t\tTESTFR con =' +bcolors.OKBLUE+'',TESTFRcon, bcolors.ENDC)
 		
-		print ('---- TCP packets:',TCP_counter,'Percent:',TCP_percent,'%')
-		print ('Possible attacks = ',attack)
+		print ('---- TCP packets:'+bcolors.OKGREEN+'',TCP_counter, bcolors.ENDC,'Percent:'+bcolors.OKGREEN+'',TCP_percent,'%'+bcolors.ENDC)
+		print ('Possible attacks = '+bcolors.FAIL+'',attack, bcolors.ENDC)
 
 		

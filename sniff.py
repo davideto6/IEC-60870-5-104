@@ -23,6 +23,8 @@ from iec104lib import *	# Library iec 60870-5-104
 import logging
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 
+
+
 class bcolors: 			# Terminal's color
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -46,17 +48,32 @@ def sniffer():
 
 def pkt_action(pkt):
     #Process every packet, updates values and rises and alert if necessary 
-
 	global pkt_counter
-	global IEC104_counter
-	global IEC104_CORRECTO
+	global IEC104_counter_i
+	global IEC104_counter_s
+	global IEC104_counter_u
 	global inicio
 	global final
-	global ip_master
+	global TCP_counter
+	global attack
+	global STARTDTact	
+	global STARTDTcon
+	global STOPDTact
+	global STOPDTcon
+	global TESTFRact
+	global TESTFRcon
+	global START_ApduLen
+	global Header_Eth
+	global Tx
+	global Rx
+
+
 	pkt_counter+=1
 
 	layers=[]
 	counter=0
+	Header_Eth=14
+	TCP_counter=0
 
 
 	pkt_counter+=1
@@ -307,10 +324,23 @@ if __name__ == "__main__":
 	config=ConfigParser.ConfigParser() #Reference values in config.ini
 	config.read("config.ini") 
 
+	
+
 	pkt_counter = 0
 	IEC104_counter = 0
-	IEC104_CORRECTO = 0
+	IEC104_counter_i = 0
+	IEC104_counter_s = 0
+	IEC104_counter_u = 0
 	inicio = 0
+	TCP_counter = 0
+	attack = 0
+	STARTDTact = 0
+	STARTDTcon = 0
+	STOPDTact = 0
+	STOPDTcon = 0
+	TESTFRact = 0
+	TESTFRcon = 0
+
 
 	interfaz = config.get('Constants','interface') 	
 

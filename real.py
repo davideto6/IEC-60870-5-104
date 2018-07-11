@@ -12,8 +12,6 @@ import sys
 import csv
 from StringIO import StringIO
 from scapy.all import * # Scapy dependences
-import IPfunctions      # Functions used for IP calculations
-import resultsDisplay   # Final results display 
 from iec104lib import *	# Library iec 60870-5-104
 
 class bcolors: 			# Terminal's color
