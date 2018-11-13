@@ -45,10 +45,7 @@ logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 config=ConfigParser.ConfigParser() #Reference values in config.ini
 config.read("config.ini")
 
-IEC104_port = config.get('Constants','IEC104_port') # Port assigned to IEC 60870-5-104
 captura = config.get('Constants','captura') # pcap
-ip_master = config.get('Constants','ip_master') # ip master
-ip_slave = config.get('Constants','ip_slave') # ip slave
 
 lista = [255]
 maestro = [20000]

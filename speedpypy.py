@@ -37,9 +37,14 @@ class control:
 
 lista = [255]
 
+def divide(x1,x2):
+    x1=float(x1)   
+    result=x1/x2
+    return result
+
 
 def sniffer():
-	sniff(offline="small_scada.pcap", prn = pkt_action, store=0)
+	sniff(offline="iec104.pcap", prn = pkt_action, store=0)
 
 
 
